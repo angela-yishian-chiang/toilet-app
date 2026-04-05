@@ -1,147 +1,169 @@
 const http = require('http');
-const fs = require('fs');
 const path = require('path');
+const fs = require('fs');
+const admin = require('firebase-admin');
 
 const PORT = process.env.PORT || 8080;
-// App Hosting/Cloud Run has a read-only file system except for /tmp
-const isProd = process.env.NODE_ENV === 'production';
-const DB_PATH = isProd ? path.join('/tmp', 'db.json') : path.join(__dirname, 'db.json');
 
-// Bootstrapping the initial db file for production if it doesn't exist
-if (isProd && !fs.existsSync(DB_PATH) && fs.existsSync(path.join(__dirname, 'db.json'))) {
-  fs.copyFileSync(path.join(__dirname, 'db.json'), DB_PATH);
+// Initialize Firebase Admin SDK
+// On Firebase App Hosting / Cloud Run, Application Default Credentials are
+// provided automatically. For local dev, set GOOGLE_APPLICATION_CREDENTIALS
+// to point to your downloaded service account key JSON file.
+if (!admin.apps.length) {
+    admin.initializeApp();
 }
 
+const db = admin.firestore();
+const CAFES_COLLECTION = 'cafes';
+
 const MIME_TYPES = {
-  default: 'application/octet-stream',
-  html: 'text/html; charset=UTF-8',
-  js: 'application/javascript',
-  css: 'text/css',
-  png: 'image/png',
-  jpg: 'image/jpg',
-  gif: 'image/gif',
-  ico: 'image/x-icon',
-  svg: 'image/svg+xml',
+    default: 'application/octet-stream',
+    html: 'text/html; charset=UTF-8',
+    js: 'application/javascript',
+    css: 'text/css',
+    png: 'image/png',
+    jpg: 'image/jpg',
+    gif: 'image/gif',
+    ico: 'image/x-icon',
+    svg: 'image/svg+xml',
 };
 
-// Helper: read db
-const readDB = () => {
-    try {
-        if(!fs.existsSync(DB_PATH)) fs.writeFileSync(DB_PATH, '[]');
-        return JSON.parse(fs.readFileSync(DB_PATH, 'utf-8'));
-    } catch(e) {
-        return [];
+const server = http.createServer(async (req, res) => {
+    // CORS purely to ensure UI fetches work locally easily
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+    if (req.method === 'OPTIONS') {
+        res.writeHead(204);
+        res.end();
+        return;
     }
-};
 
-// Helper: write db
-const writeDB = (data) => {
-    fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2), 'utf-8');
-};
+    // Handle API routes
+    if (req.url.startsWith('/api/cafes')) {
 
-const server = http.createServer((req, res) => {
-  // CORS purely to ensure UI fetches work locally easily
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+        // GET /api/cafes — return all cafes
+        if (req.method === 'GET' && req.url === '/api/cafes') {
+            try {
+                const snapshot = await db.collection(CAFES_COLLECTION).get();
+                const cafes = snapshot.docs.map(doc => doc.data());
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify(cafes));
+            } catch (e) {
+                console.error('GET /api/cafes error:', e);
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ error: 'Failed to load cafes' }));
+            }
+            return;
+        }
 
-  if (req.method === 'OPTIONS') {
-    res.writeHead(204);
-    res.end();
-    return;
-  }
+        // POST /api/cafes — add a new cafe
+        if (req.method === 'POST' && req.url === '/api/cafes') {
+            let body = '';
+            req.on('data', chunk => body += chunk.toString());
+            req.on('end', async () => {
+                try {
+                    const newCafe = JSON.parse(body);
+                    await db.collection(CAFES_COLLECTION).doc(newCafe.id).set(newCafe);
+                    res.writeHead(201, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ success: true, cafe: newCafe }));
+                } catch (e) {
+                    console.error('POST /api/cafes error:', e);
+                    res.writeHead(500, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ error: 'Failed to save cafe' }));
+                }
+            });
+            return;
+        }
 
-  // Handle API routes
-  if (req.url.startsWith('/api/cafes')) {
-      if (req.method === 'GET') {
-          res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify(readDB()));
-          return;
-      }
+        // PUT /api/cafes/:id — update rating and optionally add a review
+        if (req.method === 'PUT') {
+            const id = req.url.split('/').pop();
+            let body = '';
+            req.on('data', chunk => body += chunk.toString());
+            req.on('end', async () => {
+                try {
+                    const payload = JSON.parse(body);
+                    const docRef = db.collection(CAFES_COLLECTION).doc(id);
+                    const docSnap = await docRef.get();
 
-      if (req.method === 'POST') {
-          let body = '';
-          req.on('data', chunk => body += chunk.toString());
-          req.on('end', () => {
-              const newCafe = JSON.parse(body);
-              const data = readDB();
-              data.push(newCafe);
-              writeDB(data);
-              res.writeHead(201, { 'Content-Type': 'application/json' });
-              res.end(JSON.stringify({ success: true, cafe: newCafe }));
-          });
-          return;
-      }
+                    if (!docSnap.exists) {
+                        res.writeHead(404, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify({ error: 'Cafe not found' }));
+                        return;
+                    }
 
-      // Handle PUT /api/cafes/:id for ratings
-      if (req.method === 'PUT') {
-          const id = req.url.split('/').pop();
-          let body = '';
-          req.on('data', chunk => body += chunk.toString());
-          req.on('end', () => {
-              const payload = JSON.parse(body);
-              const data = readDB();
-              const cafeIndex = data.findIndex(c => c.id === id);
-              if(cafeIndex > -1) {
-                  data[cafeIndex].rating = payload.rating;
-                  // Push a fresh review if they requested
-                  if (payload.reviewText) {
-                      data[cafeIndex].reviews.unshift({
-                          name: "You (Edited)",
-                          rating: payload.rating,
-                          text: payload.reviewText
-                      });
-                  }
-                  writeDB(data);
-                  res.writeHead(200, { 'Content-Type': 'application/json' });
-                  res.end(JSON.stringify({ success: true, cafe: data[cafeIndex] }));
-              } else {
-                  res.writeHead(404, { 'Content-Type': 'application/json' });
-                  res.end(JSON.stringify({ error: "Cafe not found" }));
-              }
-          });
-          return;
-      }
+                    const cafe = docSnap.data();
+                    cafe.rating = payload.rating;
 
-      // Handle DELETE /api/cafes/:id
-      if (req.method === 'DELETE') {
-          const id = req.url.split('/').pop();
-          const data = readDB();
-          const newData = data.filter(c => c.id !== id);
-          if (data.length !== newData.length) {
-              writeDB(newData);
-              res.writeHead(200, { 'Content-Type': 'application/json' });
-              res.end(JSON.stringify({ success: true }));
-          } else {
-              res.writeHead(404, { 'Content-Type': 'application/json' });
-              res.end(JSON.stringify({ error: "Cafe not found" }));
-          }
-          return;
-      }
-  }
+                    if (payload.reviewText) {
+                        cafe.reviews.unshift({
+                            name: 'You (Edited)',
+                            rating: payload.rating,
+                            text: payload.reviewText
+                        });
+                    }
 
-  // Handle Static Files
-  const file = req.url === '/' ? '/index.html' : req.url;
-  const safeStr = decodeURI(file).split('?')[0];
-  const filePath = path.join(__dirname, safeStr);
-  const ext = path.extname(filePath).substring(1).toLowerCase();
+                    await docRef.set(cafe);
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ success: true, cafe }));
+                } catch (e) {
+                    console.error(`PUT /api/cafes/${id} error:`, e);
+                    res.writeHead(500, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ error: 'Failed to update cafe' }));
+                }
+            });
+            return;
+        }
 
-  fs.readFile(filePath, (err, content) => {
-    if (err) {
-      if (err.code === 'ENOENT') {
-        res.writeHead(404, { 'Content-Type': 'text/plain' });
-        res.end('404 Not Found', 'utf-8');
-      } else {
-        res.writeHead(500, { 'Content-Type': 'text/plain' });
-        res.end(`Server Error: ${err.code}`, 'utf-8');
-      }
-    } else {
-      res.writeHead(200, { 'Content-Type': MIME_TYPES[ext] || MIME_TYPES.default });
-      res.end(content, 'utf-8');
+        // DELETE /api/cafes/:id — remove a cafe
+        if (req.method === 'DELETE') {
+            const id = req.url.split('/').pop();
+            try {
+                const docRef = db.collection(CAFES_COLLECTION).doc(id);
+                const docSnap = await docRef.get();
+
+                if (!docSnap.exists) {
+                    res.writeHead(404, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ error: 'Cafe not found' }));
+                    return;
+                }
+
+                await docRef.delete();
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: true }));
+            } catch (e) {
+                console.error(`DELETE /api/cafes/${id} error:`, e);
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ error: 'Failed to delete cafe' }));
+            }
+            return;
+        }
     }
-  });
+
+    // Handle Static Files
+    const file = req.url === '/' ? '/index.html' : req.url;
+    const safeStr = decodeURI(file).split('?')[0];
+    const filePath = path.join(__dirname, safeStr);
+    const ext = path.extname(filePath).substring(1).toLowerCase();
+
+    fs.readFile(filePath, (err, content) => {
+        if (err) {
+            if (err.code === 'ENOENT') {
+                res.writeHead(404, { 'Content-Type': 'text/plain' });
+                res.end('404 Not Found', 'utf-8');
+            } else {
+                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                res.end(`Server Error: ${err.code}`, 'utf-8');
+            }
+        } else {
+            res.writeHead(200, { 'Content-Type': MIME_TYPES[ext] || MIME_TYPES.default });
+            res.end(content, 'utf-8');
+        }
+    });
 });
 
 server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
+    console.log(`Server running at http://localhost:${PORT}/`);
 });
