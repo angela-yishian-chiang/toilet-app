@@ -29,9 +29,13 @@
         <aside class="sidebar-left hidden" id="addCafeSidebar">
             <button class="close-btn" id="closeAddSidebar"><i class="ph ph-x"></i></button>
             <div class="sidebar-header">
-                <h2>Add a New Cafe</h2>
+                <h2>Menu</h2>
             </div>
             <div class="sidebar-content form-container">
+                <button class="primary-btn" id="returnHomeBtn" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); color: var(--text-primary); display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 0; margin-bottom: 10px; transition: all 0.3s;" onmouseover="this.style.background='rgba(255, 255, 255, 0.1)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.05)'" onclick="window.location.href='index.html'">
+                    <i class="ph ph-house" style="font-size: 1.2rem;"></i> Return to Homepage
+                </button>
+                <h3 style="color: var(--text-primary); font-size: 1.2rem; margin-top: 5px; margin-bottom: 5px; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;">Add a New Cafe</h3>
                 <div class="form-group">
                     <label for="newCafeName">Cafe Name</label>
                     <input type="text" id="newCafeName" placeholder="e.g. Blue Bottle Coffee" />
