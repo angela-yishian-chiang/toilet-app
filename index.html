@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyHaven - Curated Workspaces</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;1,400&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">StudyHaven</div>
+      <div class="nav-links">
+        <a href="#" class="nav-link active">Discover</a>
+        <a href="map.html" class="nav-link">Map</a>
+        <a href="#" class="nav-link">Top Rated</a>
+        <a href="#" class="nav-link">Community</a>
+      </div>
+      <div class="nav-actions">
+        <button class="btn-primary">Rate a Cafe</button>
+        <div class="user-profile">
+          <img src="./assets/ddb135c5aa1d0ec850f2df0f16063aa0e70503f2.png" alt="User Profile">
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+    <div class="hero-wrapper">
+      <section class="hero-section">
+        <div class="hero-content">
+          <h1 class="hero-title">
+            Find your next<br>
+            <span class="hero-subtitle">study haven...</span>
+          </h1>
+          <p class="hero-desc">Curated workspaces for focused minds. Discover cafes with the perfect blend of quiet corners, fast WiFi, and great espresso.</p>
+          
+          <div class="search-box">
+            <input type="text" class="search-input" placeholder="Search by city, neighborhood, or amenity...">
+            <img src="./assets/2ca949ad21482ad71a3b7a547e90375461c114b5.svg" class="search-icon" alt="Search">
+            <button class="search-btn">Search</button>
+          </div>
+
+          <div class="filters-wrapper">
+            <span class="filters-label">Popular Filters:</span>
+            <div class="filter-pills">
+              <span class="filter-pill">Fast WiFi</span>
+              <span class="filter-pill">Quiet Zone</span>
+              <span class="filter-pill">Power Outlets</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-image-container">
+            <img src="./assets/5d98d92835a1d9627cdf2b585b196a94ad6e39ba.png" alt="Cozy cafe interior">
+            <div class="hero-image-gradient"></div>
+          </div>
+          <div class="hero-card-overlap">
+            <div class="hero-card-header">
+              <div class="hero-card-icon">
+                <img src="./assets/f8dde1a0f230c134c192c890def40d319160802f.svg" alt="Icon">
+              </div>
+              <span class="hero-card-title">Top Choice this week</span>
+            </div>
+            <div class="hero-card-subtitle">The Oak & Paper</div>
+            <p class="hero-card-text">"The perfect lighting for deep work. The espresso tonic is a must-try."</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Featured Section -->
+    <section class="featured-section">
+      <div class="featured-container">
+        <div class="featured-header">
+          <div class="featured-title-group">
+            <h2 class="featured-title">Editor's Selection</h2>
+            <p class="featured-desc">Exceptional spaces vetted by our community for deep work.</p>
+          </div>
+          <a href="map.html" class="view-all-link">
+            View all listings
+            <img src="./assets/b2809f599e45f01ad34157db7abf20ac98c6b568.svg" style="width: 8px; margin-left: 2px;" alt="">
+          </a>
+        </div>
+
+        <div class="featured-grid">
+          <!-- Card 1 -->
+          <div class="cafe-card">
+            <div class="cafe-card-img-wrapper">
+              <img src="./assets/f08a74133b20d04aebc5aba1279d5f5141cba490.png" alt="Lumina Archive">
+              <div class="cafe-card-rating">
+                <img src="./assets/181ae6b4dfcc892ed7ae7be3756e88758b5d2f90.svg" alt="Star"> 4.9
+              </div>
+            </div>
+            <div class="cafe-card-content">
+              <h3 class="cafe-card-title">Lumina Archive</h3>
+              <div class="cafe-card-tags">
+                <span class="stat-pill"><img src="./assets/f0e3d8dc006d494787306945cd21101d0aee3e3d.svg" alt="Speed"> 500Mbps</span>
+                <span class="stat-pill"><img src="./assets/43208331f87a30a38b2b512eec8d18392efe025f.svg" alt="Density"> High Density</span>
+                <span class="stat-pill green"><img src="./assets/0d5cee3c3e2c2eb71997594419e79cbc412dcef4.svg" alt="Silence"> Silent Zone</span>
+              </div>
+              <div class="cafe-card-metrics">
+                <div class="metric-col">
+                  <span class="metric-label">WIFI</span>
+                  <span class="metric-value">High</span>
+                </div>
+                <div class="metric-col">
+                  <span class="metric-label">OUTLETS</span>
+                  <span class="metric-value">Plentiful</span>
+                </div>
+                <div class="metric-col">
+                  <span class="metric-label">BATHROOMS</span>
+                  <span class="metric-value">Pristine</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="cafe-card">
+            <div class="cafe-card-img-wrapper">
+              <img src="./assets/a43dc00c287cd920d6400af4441b2dc3d8a19ccd.png" alt="Greenwood Roastery">
+              <div class="cafe-card-rating">
+                <img src="./assets/181ae6b4dfcc892ed7ae7be3756e88758b5d2f90.svg" alt="Star"> 4.7
+              </div>
+            </div>
+            <div class="cafe-card-content">
+              <h3 class="cafe-card-title">Greenwood Roastery</h3>
+              <div class="cafe-card-tags">
+                <span class="stat-pill"><img src="./assets/f0e3d8dc006d494787306945cd21101d0aee3e3d.svg" alt="Speed"> 100Mbps</span>
+                <span class="stat-pill"><img src="./assets/43208331f87a30a38b2b512eec8d18392efe025f.svg" alt="Density"> Limited</span>
+                <span class="stat-pill"><img src="./assets/12b19131dd5f382ad48ffd9cb25fa954d1fe2375.svg" alt="Buzz"> Low Buzz</span>
+              </div>
+              <div class="cafe-card-metrics">
+                <div class="metric-col">
+                  <span class="metric-label">WIFI</span>
+                  <span class="metric-value">Good</span>
+                </div>
+                <div class="metric-col">
+                  <span class="metric-label">OUTLETS</span>
+                  <span class="metric-value muted">Few</span>
+                </div>
+                <div class="metric-col">
+                  <span class="metric-label">BATHROOMS</span>
+                  <span class="metric-value">Clean</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="cafe-card">
+            <div class="cafe-card-img-wrapper">
+              <img src="./assets/a3ee9e927a51dbda155e80242fbd4a5ac5dcfec8.png" alt="The Common Desk">
+              <div class="cafe-card-rating">
+                <img src="./assets/181ae6b4dfcc892ed7ae7be3756e88758b5d2f90.svg" alt="Star"> 4.8
+              </div>
+            </div>
+            <div class="cafe-card-content">
+              <h3 class="cafe-card-title">The Common Desk</h3>
+              <div class="cafe-card-tags">
+                <span class="stat-pill"><img src="./assets/f0e3d8dc006d494787306945cd21101d0aee3e3d.svg" alt="Speed"> 1Gbps</span>
+                <span class="stat-pill green"><img src="./assets/32daca6f9f3e3e3523867e7051de69d7917e5c71.svg" alt="Every Table"> Every Table</span>
+                <span class="stat-pill"><img src="./assets/12b19131dd5f382ad48ffd9cb25fa954d1fe2375.svg" alt="Buzz"> Busy</span>
+              </div>
+              <div class="cafe-card-metrics">
+                <div class="metric-col">
+                  <span class="metric-label">WIFI</span>
+                  <span class="metric-value">Ultra</span>
+                </div>
+                <div class="metric-col">
+                  <span class="metric-label">OUTLETS</span>
+                  <span class="metric-value">Max</span>
+                </div>
+                <div class="metric-col">
+                  <span class="metric-label">BATHROOMS</span>
+                  <span class="metric-value">Great</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bento Section -->
+    <section class="bento-section">
+      <h2 class="bento-title">Crafting the productive sanctuary</h2>
+      
+      <div class="bento-grid">
+        <!-- Top right wide -->
+        <div class="bento-card bento-card-metrics">
+          <div class="bento-metrics-content">
+            <img src="./assets/67eae34e499e2882e7ed1270e34a3d47c5657b49.svg" alt="Metrics Icon">
+            <div>
+              <h3>Detailed Metrics</h3>
+              <p>We don't just say 'good'. We rate specific desk height, outlet density, and ambient noise decibels.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Left tall -->
+        <div class="bento-card bento-card-verified">
+          <img src="./assets/3410c3990ccf021b780290f1a89f60e1b244dc66.svg" class="bg-icon" alt="Verified">
+          <div>
+            <h3>Verified by Scholars</h3>
+            <p>Every listing is verified for its study-friendliness. We prioritize connection speed and seat availability over decorative aesthetics.</p>
+          </div>
+        </div>
+
+        <!-- Bottom right 1 -->
+        <div class="bento-card bento-card-community">
+          <img src="./assets/b48e13958f6241d933c9b66a7bbf8828ef8527c2.svg" alt="Community">
+          <h4>Community Driven</h4>
+          <p>Real-time status updates on seating capacity.</p>
+        </div>
+
+        <!-- Bottom right 2 -->
+        <div class="bento-card bento-card-rewards">
+          <h4>Cafe Rewards</h4>
+          <p>Exclusive discounts for our top contributors.</p>
+          <img src="./assets/14864fd3d5d900f6960dd452c94c3ed2c288f7f3.svg" class="bg-icon-right" alt="Rewards">
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <div class="cta-wrapper">
+      <section class="cta-section">
+        <div class="cta-gradient-bg"></div>
+        <h2 class="cta-title">Ready to find your<br>focus spot?</h2>
+        <p class="cta-desc">Join 50,000+ students and professionals who find their sanctuary with StudyHaven.</p>
+        
+        <div class="cta-actions">
+          <button class="btn-primary btn-large">Create Account</button>
+          <button class="btn-secondary" onclick="window.location.href='map.html'">Explore the Map</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="footer-logo">StudyHaven</span>
+        <span class="footer-copyright">&copy; 2024 StudyHaven Editorial. Designed for deep work.</span>
+      </div>
+      <div class="footer-links">
+        <a href="#" class="footer-link">Support</a>
+        <a href="#" class="footer-link">Privacy Policy</a>
+        <a href="#" class="footer-link">Terms of Service</a>
+        <a href="#" class="footer-link">Cafe Partners</a>
+        <a href="#" class="footer-link">Instagram</a>
+        <a href="#" class="footer-link">Twitter</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Configuration for your Firebase App Hosting backend
+# Defines Cloud Run settings and environment variables
+
+runConfig:
+  # cpu: 1
+  # memoryMiB: 512
+  # Set minInstances to 1 to reduce cold starts (will incur cost)
+  minInstances: 0
+  maxInstances: 5
+
+env:
+  - variable: NODE_ENV
+    value: production

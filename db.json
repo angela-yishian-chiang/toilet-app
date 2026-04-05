@@ -1,0 +1,161 @@
+[
+  {
+    "id": "devocion-williamsburg",
+    "name": "Devoción",
+    "nav": "Williamsburg",
+    "lat": 40.7161,
+    "lng": -73.9647,
+    "rating": 2,
+    "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800",
+    "description": "Known for sourcing beans directly from Colombia, Devoción offers a stunning, light-filled space with a massive plant wall. The coffee is arguably the freshest in New York.",
+    "reviews": [
+      {
+        "name": "You (Edited)",
+        "rating": 2,
+        "text": "Automated review"
+      },
+      {
+        "name": "Alex B.",
+        "rating": 5,
+        "text": "The atmosphere here is absolutely incredible. The natural light and the huge plant wall make it the perfect place to focus or catch up with friends. The pour-over is insanely good."
+      },
+      {
+        "name": "Sarah M.",
+        "rating": 5,
+        "text": "Best coffee in Williamsburg, hands down. I love their farm-to-cup philosophy, you can really taste the freshness."
+      },
+      {
+        "name": "Chris T.",
+        "rating": 4,
+        "text": "Great coffee but can get very crowded on weekends. Hard to find a seat!"
+      }
+    ]
+  },
+  {
+    "id": "la-cabra-east-village",
+    "name": "La Cabra",
+    "nav": "East Village",
+    "lat": 40.7297,
+    "lng": -73.9866,
+    "rating": 4.9,
+    "image": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80&w=800",
+    "description": "A famous Danish coffee roastery and bakery that brought its minimalist aesthetic to NYC. Their cardamom buns are legendary, perfectly complementing their light-roast coffees.",
+    "reviews": [
+      {
+        "name": "Emilia R.",
+        "rating": 5,
+        "text": "You MUST get the cardamom bun. It's life-changing. The cortado I had was perfectly balanced."
+      },
+      {
+        "name": "Jason W.",
+        "rating": 5,
+        "text": "Sleek, minimalist vibe. Their single-origin espresso is incredibly bright and nuanced."
+      }
+    ]
+  },
+  {
+    "id": "sey-coffee-bushwick",
+    "name": "Sey Coffee",
+    "nav": "Bushwick",
+    "lat": 40.7053,
+    "lng": -73.9324,
+    "rating": 4.7,
+    "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=800",
+    "description": "Sey is focused on serving some of the finest, most transparently sourced coffees in the world, roasted extremely light to highlight their natural terroir. The space is beautifully bright and airy.",
+    "reviews": [
+      {
+        "name": "David L.",
+        "rating": 5,
+        "text": "If you are a true coffee nerd, this is your mecca. They do light roasts brilliantly."
+      },
+      {
+        "name": "Monica G.",
+        "rating": 4,
+        "text": "Very trendy spot. Coffee is great but it's exclusively light roasts, so be prepared for fruity/acidic profiles."
+      }
+    ]
+  },
+  {
+    "id": "stumptown-greenwich",
+    "name": "Stumptown Coffee Roasters",
+    "nav": "Greenwich Village",
+    "lat": 40.7328,
+    "lng": -73.9989,
+    "rating": 4.6,
+    "image": "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&q=80&w=800",
+    "description": "A Portland original that has become a staple in NYC. Located in the beautiful Firehouse building, it features a warm, vintage aesthetic and their classic hairbender espresso.",
+    "reviews": [
+      {
+        "name": "John P.",
+        "rating": 5,
+        "text": "Classic aesthetic, dark woods and brass. The Hair Bender espresso never disappoints."
+      },
+      {
+        "name": "Anna S.",
+        "rating": 4,
+        "text": "Solid coffee, great location near Washington Square Park. Staff is always friendly."
+      }
+    ]
+  },
+  {
+    "id": "felix-roasting-co-soho",
+    "name": "Felix Roasting Co.",
+    "nav": "SoHo",
+    "lat": 40.7235,
+    "lng": -74,
+    "rating": 4.8,
+    "image": "https://images.unsplash.com/photo-1495474472201-41b1812bb33f?auto=format&fit=crop&q=80&w=800",
+    "description": "Offering an incredibly maximalist and opulent interior, Felix Roasting Co. is an experience. Try their Hickory Smoked S'mores Latte for something wonderfully extravagant.",
+    "reviews": [
+      {
+        "name": "Rachel M.",
+        "rating": 5,
+        "text": "The interior design is absolutely stunning. It feels like an ornate jewel box. The specialty lattes are expensive but totally worth it."
+      },
+      {
+        "name": "Leo D.",
+        "rating": 5,
+        "text": "Got the smoked s'mores latte. It comes in a glass dome filled with actual smoke! Amazing presentation."
+      }
+    ]
+  },
+  {
+    "id": "silk-road-cafe",
+    "name": "Silk Road Cafe",
+    "nav": "Custom Location",
+    "lat": 40.7146942,
+    "lng": -73.9986811,
+    "rating": 4,
+    "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=800",
+    "description": "They had really cute glass teacups and teapots",
+    "reviews": [
+      {
+        "name": "You",
+        "rating": 4,
+        "text": "Newly added cafe to the map!"
+      }
+    ]
+  },
+  {
+    "id": "test-cafe",
+    "name": "Test Cafe",
+    "nav": "Custom Location",
+    "lat": 40.7345753,
+    "lng": -74.0013007,
+    "rating": 2,
+    "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=800",
+    "description": "This is a test cafe.",
+    "reviews": [
+      {
+        "name": "You (Edited)",
+        "rating": 2,
+        "text": "Updated test cafe"
+      },
+      {
+        "name": "You",
+        "rating": 5,
+        "text": "Newly added cafe to the map!"
+      }
+    ]
+  }
+]

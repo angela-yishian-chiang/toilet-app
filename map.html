@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New York City Cafe Guide</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Hamburger Menu Button -->
+        <button class="hamburger-menu" id="hamburgerMenu">
+            <i class="ph ph-list"></i>
+        </button>
+
+        <!-- Main Map Area -->
+        <main class="map-container" id="map"></main>
+
+        <!-- Add Cafe Sidebar -->
+        <aside class="sidebar-left hidden" id="addCafeSidebar">
+            <button class="close-btn" id="closeAddSidebar"><i class="ph ph-x"></i></button>
+            <div class="sidebar-header">
+                <h2>Add a New Cafe</h2>
+            </div>
+            <div class="sidebar-content form-container">
+                <div class="form-group">
+                    <label for="newCafeName">Cafe Name</label>
+                    <input type="text" id="newCafeName" placeholder="e.g. Blue Bottle Coffee" />
+                </div>
+                <div class="form-group search-group">
+                    <label for="searchAddressInput">Location (Search Name or Address)</label>
+                    <div class="search-input-wrapper">
+                        <input type="text" id="searchAddressInput" placeholder="e.g. 153 W 10th St, New York" autocomplete="off" />
+                        <div class="autocomplete-dropdown hidden" id="autocompleteDropdown"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="newCafeRating">Rating (1-5)</label>
+                    <input type="number" step="0.1" min="1" max="5" id="newCafeRating" placeholder="4.5" />
+                </div>
+                <div class="form-group">
+                    <label for="newCafeDesc">Description</label>
+                    <textarea id="newCafeDesc" rows="3" placeholder="Tell us about this spot..."></textarea>
+                </div>
+                <button class="primary-btn" id="submitNewCafe">Add to Map</button>
+            </div>
+        </aside>
+
+        <!-- Sidebar / Details Overlay -->
+        <aside class="sidebar hidden" id="sidebar">
+            <button class="close-btn" id="closeSidebar"><i class="ph ph-x"></i></button>
+            <div class="sidebar-hero">
+                <img id="cafeImage" src="" alt="Cafe cover" />
+                <div class="hero-overlay">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%; padding-right: 10px;">
+                        <h1 id="cafeName" style="margin-right: 15px;">Select a Cafe</h1>
+                        <button id="deleteCafeBtn" style="display: none; background: rgba(220, 53, 69, 0.8); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 6px 10px; border-radius: 8px; cursor: pointer; backdrop-filter: blur(4px); margin-top: 5px; transition: 0.2s;" onmouseover="this.style.background='rgba(220,53,69,1)'" onmouseout="this.style.background='rgba(220,53,69,0.8)'" title="Delete Cafe"><i class="ph ph-trash"></i></button>
+                    </div>
+                    <div class="rating">
+                        <i class="ph-fill ph-star"></i>
+                        <span id="cafeRating">4.9</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-content">
+                <p class="description" id="cafeDesc">Explore the map and click on a marker to see details.</p>
+                
+                <div class="reviews-section">
+                    <h2>Recent Reviews</h2>
+                    <div class="reviews-list" id="reviewsList">
+                        <!-- Reviews populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Custom Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
